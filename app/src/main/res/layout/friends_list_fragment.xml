@@ -34,14 +34,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:visibility="@{data.friendsList.size == 0 ? View.VISIBLE : View.GONE}"
+            android:visibility="@{data.friendsList.legacy.size == 0 ? View.VISIBLE : View.GONE}"
             />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/friendsListRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="@{data.friendsList.size > 0 ? View.VISIBLE : View.GONE}"
+            android:visibility="@{data.friendsList.legacy.size > 0 ? View.VISIBLE : View.GONE}"
             />
 
     </LinearLayout>

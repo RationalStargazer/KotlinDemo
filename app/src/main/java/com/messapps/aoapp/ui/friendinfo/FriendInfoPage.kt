@@ -6,21 +6,21 @@ import com.messapps.arch.Page
 import io.reactivex.disposables.CompositeDisposable
 
 class FriendInfoPage(
-    friend: Friend,
-    saveAndCloseTask: (Friend) -> Unit,
-    removeFriendTask: (FriendId) -> Unit
+    private val saveAndCloseTask: (Friend) -> Unit,
+    private val removeFriendTask: (FriendId) -> Unit
 ) : Page<FriendInfoData>() {
 
-    override val viewData: FriendInfoData = FriendInfoData()
+    fun init(friend: Friend) {
+        if (disposables.isDisposed) {
+            return
+        }
 
-    override fun onCleared() {
-        disposables.dispose()
-        super.onCleared()
-    }
+        if (inited) {
+            return
+        }
 
-    private val disposables: CompositeDisposable = CompositeDisposable()
+        inited = true
 
-    init {
         viewData.name.value = friend.name
         viewData.paramA.value = friend.paramA
         viewData.paramB.value = friend.paramB
@@ -46,4 +46,15 @@ class FriendInfoPage(
             }
         )
     }
+
+    override val viewData: FriendInfoData = FriendInfoData()
+
+    override fun onCleared() {
+        disposables.dispose()
+        super.onCleared()
+    }
+
+    private val disposables: CompositeDisposable = CompositeDisposable()
+
+    private var inited: Boolean = false
 }

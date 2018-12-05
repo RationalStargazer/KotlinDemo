@@ -3,6 +3,7 @@ package com.messapps.arch
 import android.support.v4.app.FragmentManager
 import com.messapps.aoapp.R
 import com.messapps.aoapp.data.Friend
+import com.messapps.aoapp.ui.friendinfo.FriendInfoFragment
 import com.messapps.aoapp.ui.friendslist.FriendsListFragment
 
 interface Navigation {
@@ -24,16 +25,21 @@ class NavigationImpl : Navigation {
 
     override fun navigate(target: Navigation.Target) {
         val fm = fragmentManager ?: throw IllegalStateException("navigate() called before required resources has set")
-        fm.beginTransaction().replace(R.id.container, createFragmentFor(target)).addToBackStack(null).commit()
+
+        val fragment = createFragmentFor(target)
+
+        if (target is Navigation.Target.FriendInfo) {
+            fragment.setArguments(target.friend.asBundle)
+        }
+
+        fm.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit()
     }
 
-    private fun createFragmentFor(target: Navigation.Target): StdFragment<*, *> {
-        return FriendsListFragment()
-
+    private fun createFragmentFor(target: Navigation.Target): StdFragment<*, *, *> {
         return when (target) {
-            //is Navigation.Target.Welcome -> WelcomeFragment()
+            is Navigation.Target.Welcome -> throw NotImplementedError("currently not implemented") //WelcomeFragment()
             is Navigation.Target.FriendsList -> FriendsListFragment()
-            //is Navigation.Target.FriendInfo -> FriendInfoFragment()
+            is Navigation.Target.FriendInfo -> FriendInfoFragment()
         }
     }
 }

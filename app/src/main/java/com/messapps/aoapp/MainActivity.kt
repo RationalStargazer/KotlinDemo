@@ -3,25 +3,25 @@ package com.messapps.aoapp
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.ViewGroup
-import com.messapps.aoapp.ui.friendslist.FriendsListData
 import com.messapps.aoapp.ui.friendslist.FriendsListFragment
-import com.messapps.aoapp.ui.friendslist.FriendsListView
-import com.messapps.arch.ConcreteViewComponent
-import com.messapps.arch.ConcreteViewManualTestFragment
+import com.messapps.aoapp.ui.tests.TestManualFriendInfoView
+import com.messapps.arch.NavigationResourcesHolder
 
-const val DEBUG_MODE: Boolean = true
+const val DEBUG_MODE: Boolean = false
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        NavigationResourcesHolder.setFragmentManager(supportFragmentManager)
+
         if (savedInstanceState == null) {
             var firstFragment: Fragment = FriendsListFragment()
 
             if (DEBUG_MODE) {
-                firstFragment = TestFragment()
+                firstFragment = TestManualFriendInfoView()
             }
 
             supportFragmentManager.beginTransaction()
@@ -29,19 +29,5 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
-
 }
 
-class TestFragment : ConcreteViewManualTestFragment() {
-    override fun viewProvider(parent: ViewGroup, savedState: Bundle?): ConcreteViewComponent {
-
-        val list: MutableList<String> = mutableListOf(
-            //"Friend 1", "Friend 2", "Friend 3", "Friend 4"
-            )
-
-        val d = FriendsListData()
-        d.friendsList.value = list
-
-        return FriendsListView(d, this, parent)
-    }
-}

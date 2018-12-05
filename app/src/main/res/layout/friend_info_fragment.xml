@@ -17,10 +17,10 @@
         android:layout_height="match_parent"
         tools:context=".ui.friendslist.FriendsListFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@={ data.name }"
+            android:text="@={ data.name.legacy }"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,18 +31,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Parameter A"
+            android:checked="@={ data.paramA.legacy }"
             />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Parameter B"
+            android:checked="@={ data.paramB.legacy }"
             />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Parameter C"
+            android:checked="@={ data.paramC.legacy }"
             />
 
         <Button

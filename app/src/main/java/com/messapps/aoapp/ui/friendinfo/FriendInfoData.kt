@@ -1,18 +1,17 @@
 package com.messapps.aoapp.ui.friendinfo
 
-import android.arch.lifecycle.MutableLiveData
-import com.messapps.arch.NNMutableLiveData
+import com.messapps.arch.MutableLiveData
 import io.reactivex.subjects.PublishSubject
 
 class FriendInfoData {
 
-    val name: NNMutableLiveData<String> = NNMutableLiveData("")
+    val name: MutableLiveData<String> = MutableLiveData("")
 
-    val paramA: NNMutableLiveData<Boolean> = NNMutableLiveData(false)
+    val paramA: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    val paramB: NNMutableLiveData<Boolean> = NNMutableLiveData(false)
+    val paramB: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    val paramC: NNMutableLiveData<Boolean> = NNMutableLiveData(false)
+    val paramC: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val saveAndCloseWish: PublishSubject<Any> = PublishSubject.create()
 

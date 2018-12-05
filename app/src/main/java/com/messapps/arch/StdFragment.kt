@@ -12,9 +12,9 @@ import android.view.ViewGroup
  * Recommended way to implement new fragments is to subclass StdFragment.<p>
  * StdFragment is a base class for fragments that are fetch and init Page via ViewModelProviders.<p>
  */
-abstract class StdFragment<PageViewData, ViewComponent: ConcreteViewComponent> : Fragment() {
+abstract class StdFragment<PageType: Page<PageViewData>, PageViewData, ViewComponent: ConcreteViewComponent> : Fragment() {
     
-    private lateinit var page: Page<PageViewData>
+    private lateinit var page: PageType
 
     private lateinit var view: ViewComponent
     
@@ -48,12 +48,12 @@ abstract class StdFragment<PageViewData, ViewComponent: ConcreteViewComponent> :
      * Correspondent factory should be already set up by PageFactoriesProvider.defineFactory()
      * @return subtype of Page that will be retrieved (or instantiated)
      */
-    protected abstract fun providePageJavaClass(): Class<out Page<PageViewData>>
+    protected abstract fun providePageJavaClass(): Class<PageType>
 
     protected abstract fun createView(viewData: PageViewData, parent: ViewGroup, savedState: Bundle?): ViewComponent
 
     @Suppress("UNUSED_PARAMETER")
-    protected fun configurePage(page: Page<PageViewData>, view: ViewComponent) {
+    protected open fun configurePage(page: PageType, view: ViewComponent) {
         // nothing to do by default (can be overrided by descendants)
     }
 }

@@ -2,14 +2,15 @@ package com.messapps.aoapp.repositories
 
 import com.messapps.aoapp.data.Friend
 import net.rationalstargazer.reactive.RProperty
-import net.rationalstargazer.reactive.RPropertySource
 
-interface FriendsRepository {
+class FriendsRepository {
 
-    val friends: RPropertySource<List<Friend>>
-}
+    val data: RProperty<List<Friend>> = RProperty(listOf()) {
+        // TODO: implement save here
+    }
 
-class FriendsRepositoryImpl {
+    init {
+        // TODO: init data here
+    }
 
-    val friends: RPropertySource<List<Friend>> = RProperty(listOf())
 }

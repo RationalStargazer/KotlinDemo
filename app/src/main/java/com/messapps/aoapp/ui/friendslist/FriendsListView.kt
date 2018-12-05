@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.messapps.aoapp.databinding.FriendsListFragmentBinding
 import com.messapps.arch.ConcreteViewComponent
-import com.messapps.arch.NNLiveData
+import com.messapps.arch.LiveData
 import io.reactivex.Observer
 
 class FriendsListView(
@@ -41,7 +41,7 @@ class FriendsListView(
     }
 
     private class StdListAdapter(
-        private val data: NNLiveData<List<String>>,
+        private val data: LiveData<List<String>>,
         private val wishes: Observer<Int>?
     ) : RecyclerView.Adapter<StdListAdapter.ViewHolder>() {
 
@@ -73,7 +73,7 @@ class FriendsListView(
         private val lifecycleHolder: LifecycleOwner,
         @LayoutRes
         private val itemLayoutResource: Int,
-        private val data: NNLiveData<List<ItemDataType>>,
+        private val data: LiveData<List<ItemDataType>>,
         private val wishes: Observer<ItemWishes>
     ) : RecyclerView.Adapter<DataBindingListAdapter.ViewHolder<ItemDataBindingType>>() {
 
